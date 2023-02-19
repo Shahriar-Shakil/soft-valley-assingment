@@ -18,11 +18,11 @@
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
     "@next/font": "latest",
+    "antd": "^5.2.2",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "date-fns": "2.15.0"
+    "react-dom": "latest"
   },
   "devDependencies": {
     "eslint": "latest",

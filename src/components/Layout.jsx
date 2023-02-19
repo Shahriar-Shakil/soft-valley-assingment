@@ -148,7 +148,7 @@ function DashboardContent({ children }) {
             </Box>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               {" "}
-              <AccountCircleOutlinedIcon sx={{ mr: 1 }} fontSize="large" />
+              {/* <AccountCircleOutlinedIcon sx={{ mr: 1 }} fontSize="large" /> */}
               <Typography variant="p" sx={{ fontSize: 12 }}>
                 Hello! Good Evening
               </Typography>
