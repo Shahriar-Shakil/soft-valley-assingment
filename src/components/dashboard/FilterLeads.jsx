@@ -1,6 +1,6 @@
 import { Box, Grid, IconButton, TextField } from "@mui/material";
 import { Container } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../Layout";
 // select
 import InputLabel from "@mui/material/InputLabel";
@@ -11,14 +11,74 @@ import { DatePicker } from "antd";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
+import { useLeadsStatus } from "../../data/useLeadsStatus";
+import { useLeadsSource } from "../../data/useLeadsSource";
+import { useLeadsAssignee } from "../../data/useLeadsAssignee";
+import dayjs from "dayjs";
+import { filterLeadAtom } from "../../recoil/atoms";
+import { useRecoilState } from "recoil";
 
 const { RangePicker } = DatePicker;
 
 export default function FilterLeads() {
-  const [age, setAge] = React.useState("");
+  const { data: leadsStatus, loading: statusLoading } = useLeadsStatus();
+  const { data: assignee, loading: assigneeLoading } = useLeadsAssignee();
+  const { data: source, loading: sourceLoading } = useLeadsSource();
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const [status, setStatus] = React.useState([]);
+  const [selectedSource, setSelectedSource] = useState([]);
+  const [selectedAssignee, setSelectedAssignee] = useState([]);
+
+  const [dates, setDates] = useState(null);
+
+  const [filterState, setFilterState] = useRecoilState(filterLeadAtom);
+  // console.log(filterState);
+  const handleStatus = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setStatus(typeof value === "string" ? value.split(",") : value);
+  };
+  const handleSource = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedSource(typeof value === "string" ? value.split(",") : value);
+  };
+  const handleAssignee = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedAssignee(typeof value === "string" ? value.split(",") : value);
+  };
+  const handleRangePicker = (dates, dateStrings) => {
+    setDates(dateStrings);
+  };
+  const handleReset = () => {
+    setStatus([]);
+    setSelectedSource([]);
+    setSelectedAssignee([]);
+    setDates(null);
+    setFilterState({
+      search: "",
+      lead_status_id: [],
+      source_id: [],
+      user_id: [],
+      contacted_date_from: "",
+      contacted_date_to: "",
+    });
+  };
+  const handleFilter = () => {
+    setFilterState((prev) => {
+      return {
+        ...prev,
+        lead_status_id: status,
+        source_id: selectedSource,
+        user_id: selectedAssignee,
+        contacted_date_from: dates?.[0] ? dates?.[0] : "",
+        contacted_date_to: dates?.[1] ? dates?.[1] : "",
+      };
+    });
   };
   return (
     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 2 }}>
@@ -26,58 +86,68 @@ export default function FilterLeads() {
         <Grid container columnSpacing={{ xs: 1, sm: 2, md: 2 }}>
           <Grid item xs={12} sm={6} md={3}>
             <FormControl sx={{ m: 1, width: "100%" }} size="small">
-              <InputLabel id="demo-select-small">Statuses</InputLabel>
+              <InputLabel id="select-status">Statuses</InputLabel>
               <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={age}
+                labelId="select-status"
+                id="select-status"
+                value={status}
                 label="Statuses"
-                onChange={handleChange}
+                onChange={handleStatus}
+                multiple
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {leadsStatus?.map((leadsStatus) => {
+                  return (
+                    <MenuItem
+                      sx={{ color: leadsStatus?.color }}
+                      key={leadsStatus?.id}
+                      value={leadsStatus?.id}
+                    >
+                      {leadsStatus.name}
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <FormControl sx={{ m: 1, width: "100%" }} size="small">
-              <InputLabel id="demo-select-small">Source</InputLabel>
+              <InputLabel id="select-source">Source</InputLabel>
               <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={age}
+                labelId="select-source"
+                id="select-source"
+                value={selectedSource}
                 label="Source"
-                onChange={handleChange}
+                onChange={handleSource}
+                multiple
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {source?.map((eachSource) => {
+                  return (
+                    <MenuItem key={eachSource?.id} value={eachSource?.id}>
+                      {eachSource.name}
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <FormControl sx={{ m: 1, width: "100%" }} size="small">
-              <InputLabel id="demo-select-small">Assignees</InputLabel>
+              <InputLabel id="select-assignees">Assignees</InputLabel>
               <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={age}
+                labelId="select-assignees"
+                id="select-assignees"
+                value={selectedAssignee}
                 label="Assignees"
-                onChange={handleChange}
+                onChange={handleAssignee}
+                multiple
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {assignee?.map((eachAssignee) => {
+                  return (
+                    <MenuItem key={eachAssignee?.id} value={eachAssignee?.id}>
+                      {eachAssignee.name}
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
           </Grid>
@@ -92,6 +162,7 @@ export default function FilterLeads() {
             }}
           >
             <RangePicker
+              onChange={handleRangePicker}
               style={{
                 height: "2.4375em",
                 width: "100%",
@@ -113,10 +184,10 @@ export default function FilterLeads() {
         sx={{ display: "flex", alignItems: "center", width: "100%" }}
       >
         <Stack spacing={2} direction="row" sx={{ width: "100%" }}>
-          <Button variant="contained" fullWidth={true}>
+          <Button variant="contained" fullWidth={true} onClick={handleFilter}>
             Filter
           </Button>
-          <Button variant="outlined" fullWidth={true}>
+          <Button variant="outlined" fullWidth={true} onClick={handleReset}>
             Reset
           </Button>
         </Stack>

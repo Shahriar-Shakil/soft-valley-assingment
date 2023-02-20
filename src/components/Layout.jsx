@@ -1,28 +1,22 @@
-import * as React from "react";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import MuiAppBar from "@mui/material/AppBar";
+import Badge from "@mui/material/Badge";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
-import Box from "@mui/material/Box";
-import MuiAppBar from "@mui/material/AppBar";
+import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import * as React from "react";
+
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Navbar from "./Navbar";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-// import { mainListItems } from "./listItems";
-// import Chart from "./Chart";
-// import Deposits from "./Deposits";
-// import Orders from "./Orders";
+//
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MenuIcon from "@mui/icons-material/Menu";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
+import { useAuth } from "../lib/use-auth";
 
 const drawerWidth = 240;
 
@@ -72,10 +66,22 @@ const Drawer = styled(MuiDrawer, {
 
 function DashboardContent({ children }) {
   const [open, setOpen] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { logout } = useAuth();
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleLogout = () => {
+    logout();
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -120,12 +126,42 @@ function DashboardContent({ children }) {
               Difficulties increase the nearer we get to the goal.
             </Typography>
           </Box>
-
+          {/* 
           <IconButton color="">
             <Badge badgeContent={4} color="primary">
               <NotificationsIcon />
             </Badge>
-          </IconButton>
+          </IconButton> */}
+          <div>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="primary"
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -139,12 +175,38 @@ function DashboardContent({ children }) {
                 flexGrow: "1",
               }}
             >
-              <Typography variant="">
-                Soft <span>Valley</span>
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                sx={{
+                  mr: 0,
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".1rem",
+                  color: "#ffc107",
+                  textDecoration: "none",
+                }}
+              >
+                SOFT
               </Typography>
-              <IconButton onClick={toggleDrawer}>
-                <ChevronLeftIcon />
-              </IconButton>
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                sx={{
+                  mr: "2px",
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".1rem",
+                  color: "#3f51b5",
+                  textDecoration: "none",
+                }}
+              >
+                VALLEY
+              </Typography>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               {" "}

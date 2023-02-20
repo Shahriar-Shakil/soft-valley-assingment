@@ -1,3 +1,9 @@
 .ant-picker:hover {
   border: 1px solid black !important;
 }
+.ant-notification {
+  z-index: 2050 !important;
+}
+.MuiDataGrid-cellContent {
+  font-size: 12px;
+}
