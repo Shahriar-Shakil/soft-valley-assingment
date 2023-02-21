@@ -12,11 +12,13 @@ import Navbar from "./Navbar";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import { useAuth } from "../lib/use-auth";
+import { useMediaQuery } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -65,9 +67,17 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 function DashboardContent({ children }) {
+  const matches = useMediaQuery("(max-width:768px)");
+
   const [open, setOpen] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { logout } = useAuth();
+
+  React.useEffect(() => {
+    if (matches) {
+      setOpen(false);
+    }
+  }, [matches]);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -103,7 +113,6 @@ function DashboardContent({ children }) {
             onClick={toggleDrawer}
             sx={{
               marginRight: "36px",
-              ...(open && { display: "none" }),
             }}
           >
             <MenuIcon />
@@ -167,14 +176,7 @@ function DashboardContent({ children }) {
       <Drawer variant="permanent" open={open}>
         <Toolbar>
           <Box sx={{ width: "100%" }}>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                flexGrow: "1",
-              }}
-            >
+            <Stack direction="row" spacing={1}>
               <Typography
                 variant="h6"
                 noWrap
@@ -207,7 +209,7 @@ function DashboardContent({ children }) {
               >
                 VALLEY
               </Typography>
-            </Box>
+            </Stack>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               {" "}
               {/* <AccountCircleOutlinedIcon sx={{ mr: 1 }} fontSize="large" /> */}

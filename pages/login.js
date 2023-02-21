@@ -1,7 +1,7 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LoadingButton from "@mui/lab/LoadingButton";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,14 +11,12 @@ import Link from "@mui/material/Link";
 import { createTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { notification } from "antd";
+import { motion } from "framer-motion";
 import * as React from "react";
 import { request } from "../src/config/api";
 import { API_ADMIN_LOGIN } from "../src/lib/api-endpoints";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { useAuth } from "../src/lib/use-auth";
-import Router from "next/router";
-import { notification } from "antd";
-import { withUser } from "../src/lib/withUser";
 
 const theme = createTheme();
 const modalSuccess = (type) => {
@@ -34,6 +32,19 @@ const modalError = (type, message) => {
     description: message,
     duration: 2,
   });
+};
+
+const nextVariants = {
+  hidden: {
+    x: "-100vw",
+  },
+  visible: {
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+    },
+  },
 };
 function SignIn() {
   const [loading, setLoading] = React.useState(false);
@@ -105,15 +116,22 @@ function SignIn() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <LoadingButton
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            loading={loading}
+          <motion.div
+            variants={nextVariants}
+            initial="hidden"
+            animate="visible"
           >
-            Sign In
-          </LoadingButton>
+            <LoadingButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              loading={loading}
+            >
+              Sign In
+            </LoadingButton>
+          </motion.div>
+
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

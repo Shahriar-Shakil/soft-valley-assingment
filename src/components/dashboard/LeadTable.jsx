@@ -12,13 +12,22 @@ import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
 import { useSWRConfig } from "swr";
 import { useRecoilState } from "recoil";
 import { filterLeadAtom } from "../../recoil/atoms";
+
 const columns = [
-  { field: "name", headerName: "Lead Name", width: 150, sortable: false },
-  { field: "phone", headerName: "Phone", width: 110, sortable: false },
   {
+    flex: 1,
+    field: "name",
+    headerName: "Lead Name",
+
+    sortable: false,
+    flex: 1,
+  },
+  { flex: 1, field: "phone", headerName: "Phone", sortable: false },
+  {
+    flex: 1,
     field: "followup_date",
     headerName: "Followup Date",
-    width: 130,
+
     renderCell: (params) => {
       if (params.row.followup_date) {
         return <Moment>{params.row.followup_date}</Moment>;
@@ -29,25 +38,31 @@ const columns = [
     sortable: false,
   },
   {
+    flex: 1,
     field: "lastNote",
     headerName: "Last Note",
-    width: 90,
     sortable: false,
     renderCell: () => {
       return <>-</>;
     },
   },
   {
+    flex: 1,
     field: "assigned",
     headerName: "Assigned",
     sortable: false,
-    width: 80,
     renderCell: () => {
       return <>-</>;
     },
   },
-  { field: "email", headerName: "Email", minWidth: 200, sortable: false },
   {
+    flex: 1,
+    field: "email",
+    headerName: "Email",
+    sortable: false,
+  },
+  {
+    flex: 1,
     field: "lead_preferred_countries",
     headerName: "Preferred Countries",
     renderCell: (params) => {
@@ -69,6 +84,7 @@ const columns = [
     sortable: false,
   },
   {
+    flex: 1,
     field: "status",
     headerName: "Status",
     renderCell: (params) => {
@@ -84,6 +100,7 @@ const columns = [
     sortable: false,
   },
   {
+    flex: 1,
     field: "source",
     headerName: "source",
     sortable: false,
@@ -97,9 +114,9 @@ const columns = [
     sortable: false,
   },
   {
+    flex: 1,
     field: "Actions",
     headerName: "actions",
-    width: 200,
     sortable: false,
 
     renderCell: () => {
