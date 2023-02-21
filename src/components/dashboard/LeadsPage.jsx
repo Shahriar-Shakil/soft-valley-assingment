@@ -1,18 +1,14 @@
 import SearchIcon from "@mui/icons-material/Search";
-import { Box, Grid, IconButton, TextField } from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import Layout from "../Layout";
 // select
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import { useRecoilState } from "recoil";
+import useDebounce from "../../lib/useDebounce";
+import { filterLeadAtom } from "../../recoil/atoms";
 import FilterLeads from "./FilterLeads";
 import LeadTable from "./LeadTable";
-import { useRecoilState } from "recoil";
-import { filterLeadAtom } from "../../recoil/atoms";
-import useDebounce from "../../lib/useDebounce";
 //
 
 export default function LeadsPage() {
