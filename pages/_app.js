@@ -8,6 +8,8 @@ import theme from "../src/theme";
 import createEmotionCache from "../src/createEmotionCache";
 import "antd/dist/antd";
 import "../styles/custom.css";
+import "../styles/loader.css";
+
 import cookies from "js-cookie";
 import { request } from "../src/config/api";
 import UserContext from "../src/user-context";
@@ -17,6 +19,7 @@ import { notification } from "antd";
 import { RecoilRoot } from "recoil";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
+
 const fetcher = (url) => {
   const cookieToken = cookies.get("token");
   request.defaults.headers.Authorization = `${"Bearer"} ${cookieToken}`;
@@ -43,6 +46,7 @@ export default function MyApp(props) {
       duration: 2,
     });
   };
+
   return (
     <RecoilRoot>
       <UserContext.Provider

@@ -45,7 +45,6 @@ export default function LeadsPage() {
           id="standard-bare"
           variant="outlined"
           onChange={(e) => setSearchTerm(e.target.value)}
-          defaultValue=""
           placeholder="Search in leads table..."
           value={searchTerm}
           InputProps={{
