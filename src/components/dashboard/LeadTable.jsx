@@ -1,16 +1,13 @@
+import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { IconButton, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import Moment from "react-moment";
-import { request } from "../../config/api";
-import { useLeadList } from "../../data/useLeads";
-import { API_LEAD_LIST } from "../../lib/api-endpoints";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
-import { useSWRConfig } from "swr";
 import { useRecoilState } from "recoil";
+import { useLeadList } from "../../data/useLeads";
 import { filterLeadAtom } from "../../recoil/atoms";
 
 const columns = [

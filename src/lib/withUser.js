@@ -28,15 +28,7 @@ export const withUser = (WrappedComponent) => {
       }, []);
       return <SignIn />;
     }
-    // useEffect(() => {
-    //   if (cookieToken) {
-    //     request.defaults.headers.Authorization = `${"Bearer"} ${cookieToken}`;
-    //   } else {
-    //     router.push(`/login`, "/login", {
-    //       shallow: true,
-    //     });
-    //   }
-    // }, []);
+
     return (
       <>
         {loading ? (

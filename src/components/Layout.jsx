@@ -1,24 +1,22 @@
 import MuiAppBar from "@mui/material/AppBar";
-import Badge from "@mui/material/Badge";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
 import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import * as React from "react";
 
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import Navbar from "./Navbar";
 //
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useAuth } from "../lib/use-auth";
-import { useMediaQuery } from "@mui/material";
 
 const drawerWidth = 240;
 

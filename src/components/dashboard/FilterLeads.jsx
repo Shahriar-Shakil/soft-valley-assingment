@@ -28,7 +28,6 @@ export default function FilterLeads() {
   const [dates, setDates] = useState(null);
 
   const [filterState, setFilterState] = useRecoilState(filterLeadAtom);
-  // console.log(filterState);
   const handleStatus = (event) => {
     const {
       target: { value },
