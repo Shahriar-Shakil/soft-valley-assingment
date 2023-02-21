@@ -12,7 +12,6 @@ import { createTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { notification } from "antd";
-import { motion } from "framer-motion";
 import * as React from "react";
 import { request } from "../src/config/api";
 import { API_ADMIN_LOGIN } from "../src/lib/api-endpoints";
@@ -34,18 +33,6 @@ const modalError = (type, message) => {
   });
 };
 
-const nextVariants = {
-  hidden: {
-    x: "-100vw",
-  },
-  visible: {
-    x: 0,
-    transition: {
-      type: "spring",
-      stiffness: 120,
-    },
-  },
-};
 function SignIn() {
   const [loading, setLoading] = React.useState(false);
 
@@ -116,21 +103,16 @@ function SignIn() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <motion.div
-            variants={nextVariants}
-            initial="hidden"
-            animate="visible"
+
+          <LoadingButton
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            loading={loading}
           >
-            <LoadingButton
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              loading={loading}
-            >
-              Sign In
-            </LoadingButton>
-          </motion.div>
+            Sign In
+          </LoadingButton>
 
           <Grid container>
             <Grid item xs>
