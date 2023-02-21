@@ -1,4 +1,4 @@
-# Material UI - Next.js example
+# Material UI - Next.js  
 
 ## How to use
 
