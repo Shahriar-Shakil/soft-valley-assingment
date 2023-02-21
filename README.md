@@ -7,6 +7,9 @@ Download the example [or clone the repo]([https://github.com/mui/material-ui](ht
 <!-- #default-branch-switch -->
 
 ```sh
+```sh
+git clone [https://codeload.github.com/mui/material-ui/tar.gz/master](https://github.com/mui/material-ui](https://github.com/Shahriar-Shakil/soft-valley-assingment.git) 
+```
 cd soft-valley-assingment
 ```
 
