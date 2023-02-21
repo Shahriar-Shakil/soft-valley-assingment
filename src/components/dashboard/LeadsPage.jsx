@@ -14,18 +14,16 @@ import LeadTable from "./LeadTable";
 export default function LeadsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterState, setFilterState] = useRecoilState(filterLeadAtom);
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(searchTerm, 600);
 
   useEffect(
     () => {
-      if (debouncedSearchTerm) {
-        setFilterState((prev) => {
-          return {
-            ...prev,
-            search: searchTerm,
-          };
-        });
-      }
+      setFilterState((prev) => {
+        return {
+          ...prev,
+          search: searchTerm,
+        };
+      });
     },
     [debouncedSearchTerm] // Only call effect if debounced search term changes
   );
