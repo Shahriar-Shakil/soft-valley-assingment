@@ -2,6 +2,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -75,9 +76,44 @@ function SignIn() {
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Stack direction="row" spacing={1}>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            sx={{
+              mr: 0,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".1rem",
+              color: "#ffc107",
+              textDecoration: "none",
+            }}
+          >
+            SOFT
+          </Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            sx={{
+              mr: "2px",
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".1rem",
+              color: "#3f51b5",
+              textDecoration: "none",
+            }}
+          >
+            VALLEY
+          </Typography>
+        </Stack>
+        <Typography component="p" sx={{ color: "#ff9800", fontSize: "14px" }}>
+          Note: Allow Insecure content from site settings
         </Typography>
+
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
