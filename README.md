@@ -9,7 +9,7 @@ Download the example [or clone the repo]([https://github.com/mui/material-ui](ht
 ```sh
 ```sh
 git clone https://github.com/Shahriar-Shakil/soft-valley-assingment.git
-```
+
 cd soft-valley-assingment
 ```
 
