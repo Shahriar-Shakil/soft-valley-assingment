@@ -110,8 +110,12 @@ function SignIn() {
             VALLEY
           </Typography>
         </Stack>
-        <Typography component="p" sx={{ color: "#ff9800", fontSize: "14px" }}>
-          Note: Allow Insecure content from site settings
+        <Typography
+          component="p"
+          sx={{ color: "#ff9800", fontSize: "14px", fontWeight: "600" }}
+        >
+          Note: Set the site settings to allow insecure content due to an
+          insecure backend API.
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
